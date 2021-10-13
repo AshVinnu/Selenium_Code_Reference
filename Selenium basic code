@@ -1,8 +1,14 @@
 //BASIC
-System.setProperty("webdriver.ie.driver","C:\IVS Files\selenium 1\IEDriverServer_Win32_2.53.1\IEDriverServer.exe"); driver =new InternetExplorerDriver(); driver.manage().window().maximize();
+System.setProperty("webdriver.ie.driver","C:\IVS Files\selenium 1\IEDriverServer_Win32_2.53.1\IEDriverServer.exe");
+driver =new InternetExplorerDriver();
+driver.manage().window().maximize();
 
 //LOGGING IN
-driver.get("http://10.67.89.86:84/Common/Login.aspx"); driver.findElement(By.id("ctl00_body_txtUserID")).sendKeys("donhere"); driver.findElement(By.id("ctl00_body_txtPassword")).sendKeys("don@123"); driver.findElement(By.id("ctl00_body_btnLogin")).click();
+driver.get("http://10.67.89.86:84/Common/Login.aspx");
+driver.findElement(By.id("ctl00_body_txtUserID")).sendKeys("donhere"); 
+driver.findElement(By.id("ctl00_body_txtPassword")).sendKeys("don@123"); 
+driver.findElement(By.id("ctl00_body_btnLogin")).click();
+
 //LOGGING IN STATUS
  String prevurl=driver.getCurrentUrl();//this should be before login code           
  String currurl=driver.getCurrentUrl();//this should be after login code
@@ -15,7 +21,12 @@ driver.get("http://10.67.89.86:84/Common/Login.aspx"); driver.findElement(By.id(
   System.out.println("login Fails");
    }
 //LOGGING IN STATUS CHECK BY CHECKING ELEMENT PRESENT OR NOT(IN THIS CASE LOGOUT)
-List all_tags=driver.findElements(By.tagName("a")); boolean flag=false; for(WebElement single_element:all_tags) { if(single_element.getText().equals("Log Out")) { flag=true; break; } } if(flag) System.out.println("Login Successful"); else System.out.println("login fail");
+List all_tags=driver.findElements(By.tagName("a")); 
+boolean flag=false; 
+for(WebElement single_element:all_tags)
+{ if(single_element.getText().equals("Log Out")) { 
+flag=true; break; } } 
+if(flag) System.out.println("Login Successful"); else System.out.println("login fail");
 //CLICK
 driver.findElement(By.id("ctl00_ctl00_body_cph_Loans_btnViewEMI")).click();
 
@@ -23,10 +34,14 @@ driver.findElement(By.id("ctl00_ctl00_body_cph_Loans_btnViewEMI")).click();
 new Select(driver.findElement(By.id("ctl00_ctl00_body_cph_Loans_ddlLoanName"))).selectByVisibleText("EducationLoan");
 
 //DROP DOWN SELECT BY CREATING NEW VARAIBLE
-Select dropdownobject=new Select(driver.findElement(By.id("ctl00_m_g_ef82aee6_4090_4222_8973_007039339c6f_ctl00_ddlBrowseByCategories"))); Thread.sleep(1000); dropdownobject.selectByIndex(2);
+Select dropdownobject=new Select(driver.findElement(By.id("ctl00_m_g_ef82aee6_4090_4222_8973_007039339c6f_ctl00_ddlBrowseByCategories"))); 
+Thread.sleep(1000); 
+dropdownobject.selectByIndex(2);
 
 //PRINTING ALL ELEMENTS FROM DROPDOWN
-WebElement Statis_ddl=driver.findElement(By.id("ctl00_ctl00_body_cph_MyAccount_ddlStatusType")); List op1=Statis_ddl.findElements(By.tagName("option")); Thread.sleep(1000);
+WebElement Statis_ddl=driver.findElement(By.id("ctl00_ctl00_body_cph_MyAccount_ddlStatusType")); 
+List op1=Statis_ddl.findElements(By.tagName("option")); 
+Thread.sleep(1000);
 
 for(int i=1;i<op1.size();i++) { System.out.println(op1.get(i).getText()); }
 
@@ -36,24 +51,36 @@ List total_links=driver.findElements(By.tagName("a")); System.out.println(total_
 for(int i=0;i<total_links.size();i++) { System.out.println(total_links.get(i).getText()); }
 
 //ALERT BOX
-Alert al=driver.switchTo().alert(); al.accept();//for close alert box, use al.dismiss();
+Alert al=driver.switchTo().alert(); al.accept();
+//for close alert box, use al.dismiss();
 
 //ANOTHER METHOD IS driver.switchTo().alert().accept();
 //SENDING VALUES TO CONFIRMATION BOX
-driver.switchTo().alert().sendKeys("Peter Parker"); driver.switchTo().alert().accept();
+driver.switchTo().alert().sendKeys("Peter Parker"); 
+driver.switchTo().alert().accept();
 
 //SCREENSHOT
-File scr=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);//import org.openqa.selenium.TakesScreenshot; and java.io and import org.openqa.selenium.OutputType; FileUtils.copyFile(scr, new File("Z:\specialized testing\screenshots\alt.jpg"));//import org.apache.commons.io.FileUtils;
+File scr=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);//import org.openqa.selenium.TakesScreenshot; and java.io and import org.openqa.selenium.OutputType; 
+FileUtils.copyFile(scr, new File("Z:\specialized testing\screenshots\alt.jpg"));//import org.apache.commons.io.FileUtils;
 
 //DISPLAYING SPECIFIED COLUMNS FROM TABLE
 List table_all_rows=driver.findElement(By.id("ctl00_ctl00_body_cph_Loans_gvCheckLoanStatus")).findElements(By.tagName("tr")); Thread.sleep(2000);
 
-for(int i=1;i<table_all_rows.size()-2;i++)//TO REMOVE ERROR GIVING ROWS { List single_row=table_all_rows.get(i).findElements(By.tagName("td")); Thread.sleep(100); System.out.println("Loan Name:"+single_row.get(0).getText());//DISPLAYING SPECIFIED COLUMNS FROM EACH ROWS System.out.println("Loan Duration:"+single_row.get(2).getText()+"\n"); }
+for(int i=1;i<table_all_rows.size()-2;i++)//TO REMOVE ERROR GIVING ROWS 
+{ List single_row=table_all_rows.get(i).findElements(By.tagName("td")); 
+Thread.sleep(100); 
+System.out.println("Loan Name:"+single_row.get(0).getText());//DISPLAYING SPECIFIED COLUMNS FROM EACH ROWS 
+System.out.println("Loan Duration:"+single_row.get(2).getText()+"\n"); }
 
 //DISPLAYING ALL COLUMNS FROM THE TABLE
-List table_all_rows=driver.findElement(By.id("ctl00_ctl00_body_cph_Loans_gvCheckLoanStatus")).findElements(By.tagName("tr")); Thread.sleep(2000);
+List table_all_rows=driver.findElement(By.id("ctl00_ctl00_body_cph_Loans_gvCheckLoanStatus")).findElements(By.tagName("tr")); 
+Thread.sleep(2000);
 
-for(int i=1;i<table_all_rows.size()-2;i++)//TO REMOVE ERROR GIVING ROWS { List single_row=table_all_rows.get(i).findElements(By.tagName("td")); Thread.sleep(100); for(int j=0;j<single_row.size();j++)//DISPLAY ALL COLUMNS FROM SINGLE ROW { System.out.print(single_row.get(j).getText()+" "); } System.out.println(" ");//FOR NEXT LINE }
+for(int i=1;i<table_all_rows.size()-2;i++)//TO REMOVE ERROR GIVING ROWS 
+{ List single_row=table_all_rows.get(i).findElements(By.tagName("td")); 
+Thread.sleep(100); for(int j=0;j<single_row.size();j++)//DISPLAY ALL COLUMNS FROM SINGLE ROW 
+{ System.out.print(single_row.get(j).getText()+" "); }
+System.out.println(" ");//FOR NEXT LINE }
 
 //Assert function
 Assert.assertEquals("Welcome to IC Downloads!",title);//assertEquals(expected,actual)
@@ -61,9 +88,22 @@ Assert.assertEquals("Welcome to IC Downloads!",title);//assertEquals(expected,ac
 Assert.assertTrue(condition);
 
 //switching to new window
-Set w_hand=driver.getWindowHandles(); java.util.Iterator itr=w_hand.iterator(); String str1=itr.next().toString();//for moving iterator from null pointer to list window String str2=itr.next().toString();//for moving to the next window in the set. Thread.sleep(500); driver.switchTo().window(str2);
+Set w_hand=driver.getWindowHandles(); 
+java.util.Iterator itr=w_hand.iterator(); 
+String str1=itr.next().toString();//for moving iterator from null pointer to list window 
+String str2=itr.next().toString();//for moving to the next window in the set. 
+Thread.sleep(500); 
+driver.switchTo().window(str2);
 //READING XLSX FILE
-FileInputStream readingobject=new FileInputStream(xlpath);//java.io Thread.sleep(500); //creating workbook XSSFWorkbook book=new XSSFWorkbook(readingobject);//import org.apache.poi.xssf.usermodel.XSSFWorkbook; Thread.sleep(500); //creating sheets, sheet index in single xlsx file XSSFSheet sheet=book.getSheetAt(0);//import org.apache.poi.xssf.usermodel.XSSFSheet; Thread.sleep(2000); //to accessing from xlsx file System.out.print(sheet.getRow(0).getCell(0).getStringCellValue());//If using numeric then //driver.findElement(By.id("ctl00_body_txtPassword")).sendKeys(sheet.getRow(0).getCell(1).getNumericCellValue()); readingobject.close();
+FileInputStream readingobject=new FileInputStream(xlpath);//java.io 
+Thread.sleep(500); //creating workbook 
+XSSFWorkbook book=new XSSFWorkbook(readingobject);//import org.apache.poi.xssf.usermodel.XSSFWorkbook; 
+Thread.sleep(500); //creating sheets, sheet index in single xlsx file 
+XSSFSheet sheet=book.getSheetAt(0);//import org.apache.poi.xssf.usermodel.XSSFSheet; 
+Thread.sleep(2000); //to accessing from xlsx file 
+System.out.print(sheet.getRow(0).getCell(0).getStringCellValue());//If using numeric then 
+//driver.findElement(By.id("ctl00_body_txtPassword")).sendKeys(sheet.getRow(0).getCell(1).getNumericCellValue()); 
+readingobject.close();
 //TO GET THE NO. OF ROWS, AND USE FOR ITERATION
 int norows=sheet.getLastRowNum()-sheet.getFirstRowNum();
 
@@ -71,7 +111,16 @@ int norows=sheet.getLastRowNum()-sheet.getFirstRowNum();
 driver.findElement(By.id("ctl00_body_txtUserID")).sendKeys(sheet.getRow(i).getCell(2).getStringCellValue());
 
 //WRITING INTO XLSX FILE
-//INSIDE FOR LOOP// //creating row object, with row pointing to 0 index Row curRow=sheet.getRow(0); Thread.sleep(2000); //creating column object for the above row, for column 0 Cell cell1=curRow.createCell(1); Thread.sleep(2000); //setting the value of 0th row and 0th column cell1.setCellValue("hello ravi"); Thread.sleep(2000); ---------------------------//AFTER FOR LOOP END WRITE THIS CODE//------------------- //creating output stream object FileOutputStream opstream = new FileOutputStream(xlpath); Thread.sleep(1000); //writing onto the 'book' object using output stream object book.write(opstream); book.close();
+//INSIDE FOR LOOP// //creating row object, with row pointing to 0 index 
+Row curRow=sheet.getRow(0); 
+Thread.sleep(2000); //creating column object for the above row, for column 0 
+Cell cell1=curRow.createCell(1); 
+Thread.sleep(2000); //setting the value of 0th row and 0th column 
+cell1.setCellValue("hello ravi"); 
+Thread.sleep(2000); ---------------------------//AFTER FOR LOOP END WRITE THIS CODE//------------------- //creating output stream object 
+FileOutputStream opstream = new FileOutputStream(xlpath); 
+Thread.sleep(1000); //writing onto the 'book' object using output stream object 
+book.write(opstream); book.close();
 
 //IMPLICIT WAIT
 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -84,11 +133,24 @@ String.valueOf((int)sheet.getRow(i).getCell(0).getNumericCellValue());
 Double.toString(sheet.getRow(i).getCell(0).getNumericCellValue());
 
 //Some type conversion method
-Double.toString()--converting double to string (int)argument--converting any value to int String.valueOf(argument)--converting int to string
+Double.toString()--converting double to string 
+(int)argument--converting any value to int 
+String.valueOf(argument)--converting int to string
 
 //MOUSE HOVER ON LINK
-Actions action = new Actions(driver); WebElement we = driver.findElement(By.linkText("Web Apps")); action.moveToElement(we).build().perform();
+Actions action = new Actions(driver); 
+WebElement we = driver.findElement(By.linkText("Web Apps")); 
+action.moveToElement(we).build().perform();
 driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
 //TestNG XML
-HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(file)); HSSFSheet myExcelSheet = myExcelBook.getSheet("Birthdays"); HSSFRow row = myExcelSheet.getRow(0); if (row.getCell(0).getCellType() == HSSFCell.CELL_TYPE_STRING) { String name = row.getCell(0).getStringCellValue(); System.out.println("name : " + name); } if (row.getCell(1).getCellType() == HSSFCell.CELL_TYPE_NUMERIC) { Date birthdate = row.getCell(1).getDateCellValue(); System.out.println("birthdate :" + birthdate); } myExcelBook.close();
+HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(file)); 
+HSSFSheet myExcelSheet = myExcelBook.getSheet("Birthdays");
+HSSFRow row = myExcelSheet.getRow(0); 
+if (row.getCell(0).getCellType() == HSSFCell.CELL_TYPE_STRING) 
+{ String name = row.getCell(0).getStringCellValue(); 
+System.out.println("name : " + name); } 
+if (row.getCell(1).getCellType() == HSSFCell.CELL_TYPE_NUMERIC) 
+{ Date birthdate = row.getCell(1).getDateCellValue(); 
+System.out.println("birthdate :" + birthdate); } 
+myExcelBook.close();
 
